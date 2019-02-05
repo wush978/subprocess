@@ -65,7 +65,7 @@ process_read <- function (handle, pipe = PIPE_BOTH, timeout = TIMEOUT_IMMEDIATE,
   # replace funny line ending and break into multiple lines
   output <- lapply(output, function (single_stream) {
     if (!length(single_stream)) return(character())
-    single_stream <- gsub("\r", "", single_stream, fixed = TRUE)
+    single_stream <- gsub("\r", "", single_stream, fixed = TRUE, useBytes = TRUE)
     strsplit(single_stream, "\n", fixed = TRUE)[[1]]
   })
   
