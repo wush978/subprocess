@@ -56,7 +56,7 @@ process_read <- function (handle, pipe = PIPE_BOTH, timeout = TIMEOUT_IMMEDIATE,
   if (isTRUE(flush)) {
     while (TRUE) {
       more <- .Call("C_process_read", handle$c_handle, as.character(pipe), TIMEOUT_IMMEDIATE)
-      if (!is_output(more) || all(vapply(more, nchar, integer(1)) == 0))
+      if (!is_output(more) || all(vapply(more, nchar, integer(1), type = "bytes") == 0))
         break
       output <- paste0_list(output, more)
     }
